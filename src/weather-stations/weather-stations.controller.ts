@@ -1,4 +1,10 @@
-import { Controller, Get, Param, NotFoundException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  NotFoundException,
+  Query,
+} from '@nestjs/common';
 import { WeatherStationsService } from './weather-stations.service';
 
 @Controller('weather-stations')
@@ -8,6 +14,11 @@ export class WeatherStationsController {
   @Get()
   getAllStations() {
     return this.service.findAll();
+  }
+
+  @Get('by-state')
+  getStationsByState(@Query('state') state: string) {
+    return this.service.findByState(state);
   }
 
   @Get(':id/latest')

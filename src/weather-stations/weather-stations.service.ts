@@ -19,7 +19,9 @@ export class WeatherStationsService {
   findAll() {
     return this.stationRepo.find();
   }
-
+  async findByState(state: string) {
+    return this.stationRepo.find({ where: { state } });
+  }
   async findLatestMeasurements(id: number) {
     const station = await this.stationRepo.findOne({
       where: { id },
