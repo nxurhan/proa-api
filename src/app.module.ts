@@ -3,7 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { WeatherStation } from './entities/weather-station.entity';
 import { Variable } from './entities/variable.entity';
 import { Measurement } from './entities/measurement.entity';
-import { SeedService } from '../seed/seed.service';
+import { SeedService } from './seed/seed.service';
+import { WeatherStationsModule } from './weather-stations/weather-stations.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { SeedService } from '../seed/seed.service';
       synchronize: true,
     }),
     TypeOrmModule.forFeature([WeatherStation, Variable, Measurement]),
+    WeatherStationsModule,
   ],
   providers: [SeedService],
 })

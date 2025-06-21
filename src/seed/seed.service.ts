@@ -4,9 +4,9 @@ import * as path from 'path';
 import * as csv from 'csv-parser';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { WeatherStation } from '../src/entities/weather-station.entity';
-import { Variable } from '../src/entities/variable.entity';
-import { Measurement } from '../src/entities/measurement.entity';
+import { WeatherStation } from 'src/entities/weather-station.entity';
+import { Variable } from 'src/entities/variable.entity';
+import { Measurement } from 'src/entities/measurement.entity';
 import * as glob from 'glob';
 
 @Injectable()
