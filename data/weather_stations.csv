@@ -4,7 +4,7 @@ id,ws_name,site,portfolio,state,latitude,longitude
 3,Bungala 2 East,Bungala 2 Solar Farm,Enel Green Power,SA,-32.405243,137.833565
 4,Parkes North,Parkes Solar Farm,NEOEN,NSW,-33.104181,148.07779
 5,Parkes South,Parkes Solar Farm,NEOEN,NSW,-33.123945,148.077615
-6,Parkes East,Parkes Solar Farm,NEOEN,NSW,33.110485,148.101728
+6,Parkes East,Parkes Solar Farm,NEOEN,NSW,-33.110485,148.101728
 7,Coopers Gap Mast ,Coopers Gap Wind Farm,AGL,QLD,-26.744933,151.46473
 8,Bulgana Mast,Bulgana Green Power Hub,NEOEN,VIC,-37.062474,142.950079
 9,Childers West,Childers Solar Farm,Atmos,QLD,-25.304253,152.407882
