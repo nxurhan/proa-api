@@ -1,4 +1,4 @@
-# 🔧 Proa Weather API (Backend)
+# Proa Weather API (Backend)
 
 This is the backend application for the Proa coding challenge. It is built with **NestJS**, uses **SQLite** via **TypeORM**, and exposes weather station data through a JSON API.
 
@@ -16,8 +16,6 @@ This is the backend application for the Proa coding challenge. It is built with 
 - [TypeORM](https://typeorm.io/)
 - [SQLite](https://www.sqlite.org/index.html)
 - [CSV Parser](https://www.npmjs.com/package/csv-parser)
-
----
 
 ## Getting Started
 
@@ -85,7 +83,6 @@ Response json
 
 ### Project Structure
 ~~~
-.
 ├── data/
 │   ├── weather_stations.csv
 │   ├── variables.csv
