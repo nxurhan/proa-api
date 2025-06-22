@@ -92,7 +92,7 @@ export class SeedService implements OnApplicationBootstrap {
 
   async seedMeasurements() {
     const files = glob.sync('data/data_*.csv', { cwd: process.cwd() });
-    console.log(`📂 Found ${files.length} measurement files`);
+    console.log(`Found ${files.length} measurement files`);
 
     for (const filePath of files) {
       const fileName = path.basename(filePath);
@@ -160,7 +160,7 @@ export class SeedService implements OnApplicationBootstrap {
                 `Seeded ${batch.length} measurements from ${fileName}`,
               );
             } else {
-              console.warn(`⚠️ No valid measurements found in ${fileName}`);
+              console.warn(`No valid measurements found in ${fileName}`);
             }
             resolve();
           })

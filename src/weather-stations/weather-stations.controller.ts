@@ -13,18 +13,11 @@ export class WeatherStationsController {
 
   @Get()
   getAllStations() {
-    return this.service.findAll();
+    return this.service.findAllWithLatestMeasurements();
   }
 
   @Get('by-state')
   getStationsByState(@Query('state') state: string) {
     return this.service.findByState(state);
-  }
-
-  @Get(':id/latest')
-  async getLatest(@Param('id') id: string) {
-    const result = await this.service.findLatestMeasurements(+id);
-    if (!result) throw new NotFoundException('Station not found');
-    return result;
   }
 }

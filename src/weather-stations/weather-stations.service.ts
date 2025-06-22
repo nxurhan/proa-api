@@ -22,43 +22,43 @@ export class WeatherStationsService {
   async findByState(state: string) {
     return this.stationRepo.find({ where: { state } });
   }
-  async findLatestMeasurements(id: number) {
-    const station = await this.stationRepo.findOne({
-      where: { id },
+
+  async findAllWithLatestMeasurements() {
+    const stations = await this.stationRepo.find({
       relations: ['variables'],
     });
-    if (!station) return null;
 
-    const latest = await Promise.all(
-      station.variables.map(async (v) => {
-        const m = await this.measurementRepo.findOne({
-          where: { variable: { var_id: v.var_id } },
-          order: { timestamp: 'DESC' },
-        });
+    return await Promise.all(
+      stations.map(async (station) => {
+        const latestMeasurements = await Promise.all(
+          station.variables.map(async (v) => {
+            const m = await this.measurementRepo.findOne({
+              where: { variable: { var_id: v.var_id } },
+              order: { timestamp: 'DESC' },
+            });
 
-        return m
-          ? {
-              variable: v.name,
+            if (!m) return null;
+
+            return {
               long_name: v.long_name,
               unit: v.unit,
               value: m.value,
               timestamp: m.timestamp,
-            }
-          : null;
+            };
+          }),
+        );
+
+        return {
+          id: station.id,
+          ws_name: station.ws_name,
+          site: station.site,
+          portfolio: station.portfolio,
+          state: station.state,
+          latitude: station.latitude,
+          longitude: station.longitude,
+          latestMeasurements: latestMeasurements.filter(Boolean),
+        };
       }),
     );
-
-    return {
-      station: {
-        id: station.id,
-        ws_name: station.ws_name,
-        site: station.site,
-        portfolio: station.portfolio,
-        state: station.state,
-        latitude: station.latitude,
-        longitude: station.longitude,
-      },
-      measurements: latest.filter((m) => m !== null),
-    };
   }
 }

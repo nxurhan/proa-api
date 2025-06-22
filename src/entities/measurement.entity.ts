@@ -1,4 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { Variable } from './variable.entity';
 
 @Entity()
@@ -6,7 +12,8 @@ export class Measurement {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Variable, (variable) => variable.measurements)
+  @ManyToOne(() => Variable, (v) => v.measurements)
+  @JoinColumn({ name: 'variable_id' })
   variable: Variable;
 
   @Column('datetime')
