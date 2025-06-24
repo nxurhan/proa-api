@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { WeatherStationsController } from './weather-stations.controller';
+import { WeatherStationsService } from './weather-stations.service';
 
 describe('WeatherStationsController', () => {
   let controller: WeatherStationsController;
@@ -7,9 +8,26 @@ describe('WeatherStationsController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [WeatherStationsController],
+      providers: [
+        WeatherStationsService,
+        {
+          provide: 'WeatherStationRepository',
+          useValue: {},
+        },
+        {
+          provide: 'VariableRepository',
+          useValue: {},
+        },
+        {
+          provide: 'MeasurementRepository',
+          useValue: {},
+        },
+      ],
     }).compile();
 
-    controller = module.get<WeatherStationsController>(WeatherStationsController);
+    controller = module.get<WeatherStationsController>(
+      WeatherStationsController,
+    );
   });
 
   it('should be defined', () => {
