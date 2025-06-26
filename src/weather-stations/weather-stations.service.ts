@@ -19,8 +19,14 @@ export class WeatherStationsService {
   findAll() {
     return this.stationRepo.find();
   }
-  async findByState(state: string) {
-    return this.stationRepo.find({ where: { state } });
+
+  async findByStateWithLatestMeasurements(state: string) {
+    const stations = await this.stationRepo.find({
+      where: { state },
+      relations: ['variables'],
+    });
+
+    return this.buildStationsWithMeasurements(stations);
   }
 
   async findAllWithLatestMeasurements() {
@@ -28,6 +34,10 @@ export class WeatherStationsService {
       relations: ['variables'],
     });
 
+    return this.buildStationsWithMeasurements(stations);
+  }
+
+  private async buildStationsWithMeasurements(stations: WeatherStation[]) {
     return await Promise.all(
       stations.map(async (station) => {
         const latestMeasurements = await Promise.all(
